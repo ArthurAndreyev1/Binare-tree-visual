@@ -1,0 +1,69 @@
+@startuml
+
+class BinaryTreeSimulator {
+    + main(String[]): void
+    + run(): void
+}
+
+class BinaryTreePanel {
+    - nodePositions: Map<BinaryTreeNode, Point>
+    - subtreeSizes: Map<BinaryTreeNode, Integer>
+    - traversalLabel: JLabel
+    - root: BinaryTreeNode
+    + NODE_RADIUS: int
+    + HORIZONTAL_GAP: int
+    + VERTICAL_GAP: int
+    + setRoot(BinaryTreeNode): void
+    + setTraversalLabelText(String): void
+    + paintComponent(Graphics): void
+    + drawTree(Graphics, BinaryTreeNode, int, int, int): void
+    + drawConnector(Graphics, int, int, int, int): void
+    + updateSubtreeSizes(BinaryTreeNode): void
+    + calculateSubtreeSize(BinaryTreeNode): int
+    + repositionNodes(): void
+    + positionNode(BinaryTreeNode, int, int, int): void
+    + animateNode(BinaryTreeNode, int, int): void
+}
+
+class BinaryTreeNode {
+    - value: int
+    - leftChild: BinaryTreeNode
+    - rightChild: BinaryTreeNode
+    - data: Object
+    + BinaryTreeNode(int)
+    + getValue(): int
+    + getLeftChild(): BinaryTreeNode
+    + setLeftChild(BinaryTreeNode): void
+    + getRightChild(): BinaryTreeNode
+    + setRightChild(BinaryTreeNode): void
+    + getData(): Object
+    + setData(Object): void
+}
+
+class ControlPanel {
+    - binaryTreePanel: BinaryTreePanel
+    - textField: JTextField
+    - binaryTreeRoot: BinaryTreeNode
+    - animationInProgress: boolean
+    - insertButton: JButton
+    - deleteButton: JButton
+    - inorderButton: JButton
+    - preorderButton: JButton
+    - postorderButton: JButton
+    + ControlPanel(BinaryTreePanel)
+    + disableButtonsDuringAnimation(): void
+    + enableButtonsAfterAnimation(): void
+    + setButtonsEnabled(boolean): void
+    + setButtonsColor(Color): void
+    + insertNodeFromTextField(): void
+    + deleteNodeFromTextField(): void
+    + insertNode(BinaryTreeNode, int): BinaryTreeNode
+    + deleteNode(BinaryTreeNode, int): BinaryTreeNode
+}
+
+BinaryTreeSimulator --> BinaryTreePanel
+BinaryTreePanel --> BinaryTreeNode
+ControlPanel --> BinaryTreePanel
+ControlPanel --> BinaryTreeNode
+
+@enduml
